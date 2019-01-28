@@ -9,7 +9,7 @@ This can be installed using composer for example:
  Then the most simple method of getting the reviews is as follows
  
 ```php
-$reviews = new SykesCottages\feefo\Reviews('merchant-identifier');
+$reviews = new SykesCottages\Feefo\Reviews('merchant-identifier');
 foreach ($reviews->getReviews() as $review) {
     // Handle review here
 }
