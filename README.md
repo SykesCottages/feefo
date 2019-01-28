@@ -4,7 +4,7 @@ This is designed to be an easy way in php to use the reviews API from Feefo.
 
 This can be installed using composer for example:
 
-    composer require sykesCottages/feefo
+    composer require sykescottages/feefo
     
  Then the most simple method of getting the reviews is as follows
  
