@@ -4,12 +4,12 @@ This is designed to be an easy way in php to use the reviews API from Feefo.
 
 This can be installed using composer for example:
 
-    composer require SykesCottages/Feefo
+    composer require sykesCottages/feefo
     
  Then the most simple method of getting the reviews is as follows
  
 ```php
-$reviews = new SykesCottages\Feefo\Reviews('merchant-identifier');
+$reviews = new SykesCottages\feefo\Reviews('merchant-identifier');
 foreach ($reviews->getReviews() as $review) {
     // Handle review here
 }
