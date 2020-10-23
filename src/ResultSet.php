@@ -22,7 +22,7 @@ class ResultSet implements Countable, Iterator
 
     public function current()
     {
-        return $this->array[$this->current];
+        return $this->dataArray[$this->current];
     }
 
     public function next(): void
@@ -43,7 +43,7 @@ class ResultSet implements Countable, Iterator
 
         if ($this->summary->current_page < $this->summary->pages) {
             $this->getMoreResults();
-            return isset($this->array[$this->current]);
+            return isset($this->dataArray[$this->current]);
         }
 
         return false;
@@ -56,12 +56,12 @@ class ResultSet implements Countable, Iterator
 
     public function getArray(): array
     {
-        return $this->array;
+        return $this->dataArray;
     }
 
     public function count(): int
     {
-        return count($this->array);
+        return count($this->dataArray);
     }
 
     protected function getMoreResults(): void
@@ -69,6 +69,6 @@ class ResultSet implements Countable, Iterator
         $this->summary->current_page++;
         $this->reviews->page($this->summary->current_page);
         $extraReviews = $this->reviews->getReviews();
-        $this->array  = array_merge($this->array, $extraReviews->getArray());
+        $this->array  = array_merge($this->dataArray, $extraReviews->getArray());
     }
 }
