@@ -7,14 +7,14 @@ use GuzzleHttp\RequestOptions;
 
 class Reviews extends Client
 {
-    public $url = 'https://api.feefo.com/api/10/reviews/product';
-    public $merchantIdentifier;
-    public $sincePeriod = 'all';
-    public $fullThread = 'include';
-    public $pageSize = 100;
-    public $page = 1;
     public $fields;
+    public $fullThread = 'include';
+    public $merchantIdentifier;
+    public $page = 1;
+    public $pageSize = 100;
+    public $sincePeriod = 'all';
     public $sku;
+    public $url = 'https://api.feefo.com/api/10/reviews/product';
 
     public function __construct(string $merchantIdentifier)
     {
