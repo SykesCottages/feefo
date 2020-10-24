@@ -10,20 +10,20 @@ class ResultSetTest extends TestCase
 {
     private $reviews;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->reviews = $this->createMock(Reviews::class);
     }
 
-    public function testCountable()
+    public function testCountable(): void
     {
         $resultSet = new ResultSet($this->reviews, [1, 2], (object)["pages" => 1, "current_page" => 1]);
 
         $this->assertEquals(2, count($resultSet));
     }
 
-    public function testIterating()
+    public function testIterating(): void
     {
         $resultSet = new ResultSet($this->reviews, [1, 2], (object)["pages" => 3, "current_page" => 1]);
         $extraResults = new ResultSet($this->reviews, [3], (object)["pages" => 3, "current_page" => 2]);
@@ -40,7 +40,7 @@ class ResultSetTest extends TestCase
         $this->assertEquals(2, $key);
     }
 
-    public function testIteratingWithCurrentPageAfterPages()
+    public function testIteratingWithCurrentPageAfterPages(): void
     {
         $resultSet = new ResultSet($this->reviews, [1, 2], (object)["pages" => 1, "current_page" => 4]);
 
