@@ -3,8 +3,8 @@
 namespace SykesCottages\Feefo\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SykesCottages\Feefo\Reviews;
 use SykesCottages\Feefo\Review;
+use SykesCottages\Feefo\Reviews;
 
 class ReviewsTest extends TestCase
 {
@@ -14,14 +14,14 @@ class ReviewsTest extends TestCase
     private $reviews;
     private $sampleReviews;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->reviews = new Reviews('example-freefo-merchant');
+        $this->reviews = new Reviews('example-retail-merchant');
         $this->sampleReviews = json_decode(file_get_contents(__DIR__ . '/fixtures/SampleReviews.json'));
     }
 
-    public function testGetReviews()
+    public function testGetReviews(): void
     {
         $this->reviews->url('https://api.feefo.com/api/10/reviews/product');
         $this->reviews->sincePeriod('all');
@@ -29,7 +29,7 @@ class ReviewsTest extends TestCase
         $this->reviews->pageSize(1);
         $this->reviews->page(1);
         $this->reviews->fields('reviews.products.review');
-        $this->reviews->sku('G0BAQSJ6');
+        $this->reviews->sku('8CY8JREAG');
 
         $expectedReview[] = new Review($this->sampleReviews->singleReview);
 
