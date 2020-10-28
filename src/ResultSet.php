@@ -7,10 +7,10 @@ use Iterator;
 
 class ResultSet implements Countable, Iterator
 {
-    protected $reviews;
-    protected $array;
-    protected $summary;
-    protected $current = 0;
+    protected Reviews $reviews;
+    protected array $array;
+    protected object $summary;
+    protected int $current = 0;
 
     public function __construct(Reviews $reviews, array $startingArray, object $summary)
     {

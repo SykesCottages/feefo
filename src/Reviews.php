@@ -7,14 +7,14 @@ use GuzzleHttp\RequestOptions;
 
 class Reviews extends Client
 {
-    public $url = 'https://api.feefo.com/api/10/reviews/product';
-    public $merchantIdentifier;
-    public $sincePeriod = 'all';
-    public $fullThread = 'include';
-    public $pageSize = 100;
-    public $page = 1;
-    public $fields;
-    public $sku;
+    public string $url = 'https://api.feefo.com/api/10/reviews/product';
+    public string $merchantIdentifier;
+    public string $sincePeriod = 'all';
+    public string $fullThread = 'include';
+    public string $fields;
+    public string $sku;
+    public int $pageSize = 100;
+    public int $page = 1;
 
     public function __construct(string $merchantIdentifier)
     {
@@ -22,7 +22,7 @@ class Reviews extends Client
         $this->merchantIdentifier = $merchantIdentifier;
     }
 
-    public function getReviews(): ResultSet
+    public function getReviews() : ResultSet
     {
         $query = [
             'merchant_identifier' => $this->merchantIdentifier,
@@ -40,56 +40,61 @@ class Reviews extends Client
             $query['product_sku'] = '*' . $this->sku . '*';
         }
 
-        $response = json_decode($this->get($this->url, [
-            RequestOptions::QUERY => $query,
-        ])->getBody());
+        $response = json_decode(
+            $this->get(
+                $this->url,
+                [
+                    RequestOptions::QUERY => $query,
+                ]
+            )->getBody()
+        );
 
         return $this->makeReviews($response);
     }
 
-    public function url(string $url): Reviews
+    public function url(string $url) : Reviews
     {
         $this->url = $url;
         return $this;
     }
 
-    public function sincePeriod(string $sincePeriod): Reviews
+    public function sincePeriod(string $sincePeriod) : Reviews
     {
         $this->sincePeriod = $sincePeriod;
         return $this;
     }
 
-    public function fullThread(string $fullThread): Reviews
+    public function fullThread(string $fullThread) : Reviews
     {
         $this->fullThread = $fullThread;
         return $this;
     }
 
-    public function pageSize(int $pageSize): Reviews
+    public function pageSize(int $pageSize) : Reviews
     {
         $this->pageSize = $pageSize;
         return $this;
     }
 
-    public function page(int $page): Reviews
+    public function page(int $page) : Reviews
     {
         $this->page = $page;
         return $this;
     }
 
-    public function fields(string $fields): Reviews
+    public function fields(string $fields) : Reviews
     {
         $this->fields = $fields;
         return $this;
     }
 
-    public function sku(string $sku): Reviews
+    public function sku(string $sku) : Reviews
     {
         $this->sku = $sku;
         return $this;
     }
 
-    private function makeReviews(object $response): ResultSet
+    private function makeReviews(object $response) : ResultSet
     {
         $reviews = [];
         if (isset($response->reviews)) {
