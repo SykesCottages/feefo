@@ -7,22 +7,21 @@ use Iterator;
 
 class ResultSet implements Countable, Iterator
 {
-    protected $dataArray;
-    protected $current;
-    protected $reviews;
-    protected $summary;
+    protected Reviews $reviews;
+    protected array $array;
+    protected object $summary;
+    protected int $current = 0;
 
     public function __construct(Reviews $reviews, array $startingArray, object $summary)
     {
-        $this->current   = 0;
-        $this->dataArray = $startingArray;
-        $this->reviews   = $reviews;
-        $this->summary   = $summary;
+        $this->reviews = $reviews;
+        $this->array = $startingArray;
+        $this->summary = $summary;
     }
 
     public function current()
     {
-        return $this->dataArray[$this->current];
+        return $this->array[$this->current];
     }
 
     public function next(): void
@@ -37,13 +36,13 @@ class ResultSet implements Countable, Iterator
 
     public function valid(): bool
     {
-        if (isset($this->dataArray[$this->current])) {
+        if (isset($this->array[$this->current])) {
             return true;
         }
 
         if ($this->summary->current_page < $this->summary->pages) {
             $this->getMoreResults();
-            return isset($this->dataArray[$this->current]);
+            return isset($this->array[$this->current]);
         }
 
         return false;
@@ -56,19 +55,19 @@ class ResultSet implements Countable, Iterator
 
     public function getArray(): array
     {
-        return $this->dataArray;
+        return $this->array;
     }
 
     public function count(): int
     {
-        return count($this->dataArray);
+        return count($this->array);
     }
 
     protected function getMoreResults(): void
     {
         $this->summary->current_page++;
         $this->reviews->page($this->summary->current_page);
-        $extraReviews    = $this->reviews->getReviews();
-        $this->dataArray = array_merge($this->dataArray, $extraReviews->getArray());
+        $extraReviews = $this->reviews->getReviews();
+        $this->array = array_merge($this->array, $extraReviews->getArray());
     }
 }

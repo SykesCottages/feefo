@@ -4,7 +4,7 @@ namespace SykesCottages\Feefo;
 
 class Review
 {
-    public $review;
+    public object $review;
 
     public function __construct(object $review)
     {
