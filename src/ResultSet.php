@@ -37,7 +37,7 @@ class ResultSet implements Countable, Iterator
 
     public function valid(): bool
     {
-        if (isset($this->array[$this->current])) {
+        if (isset($this->dataArray[$this->current])) {
             return true;
         }
 
@@ -68,7 +68,7 @@ class ResultSet implements Countable, Iterator
     {
         $this->summary->current_page++;
         $this->reviews->page($this->summary->current_page);
-        $extraReviews = $this->reviews->getReviews();
-        $this->array  = array_merge($this->array, $extraReviews->getArray());
+        $extraReviews    = $this->reviews->getReviews();
+        $this->dataArray = array_merge($this->dataArray, $extraReviews->getArray());
     }
 }
