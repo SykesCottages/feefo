@@ -24,17 +24,17 @@ class ResultSet implements Countable, Iterator
         return $this->array[$this->current];
     }
 
-    public function next()
+    public function next(): void
     {
         $this->current++;
     }
 
-    public function key()
+    public function key(): int
     {
         return $this->current;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         if (isset($this->array[$this->current])) {
             return true;
@@ -48,22 +48,22 @@ class ResultSet implements Countable, Iterator
         return false;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->current = 0;
     }
 
-    public function getArray()
+    public function getArray(): array
     {
         return $this->array;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->array);
     }
 
-    protected function getMoreResults()
+    protected function getMoreResults(): void
     {
         $this->summary->current_page++;
         $this->reviews->page($this->summary->current_page);

@@ -40,14 +40,9 @@ class Reviews extends Client
             $query['product_sku'] = '*' . $this->sku . '*';
         }
 
-        $response = json_decode(
-            $this->get(
-                $this->url,
-                [
-                    RequestOptions::QUERY => $query,
-                ]
-            )->getBody()
-        );
+        $response = json_decode($this->get($this->url, [
+            RequestOptions::QUERY => $query,
+        ])->getBody());
 
         return $this->makeReviews($response);
     }
