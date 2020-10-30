@@ -1,20 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SykesCottages\Feefo;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+
+use function json_decode;
 
 class Reviews extends Client
 {
     public string $url = 'https://api.feefo.com/api/10/reviews/product';
     public string $merchantIdentifier;
     public string $sincePeriod = 'all';
-    public string $fullThread = 'include';
+    public string $fullThread  = 'include';
     public string $fields;
     public string $sku;
     public int $pageSize = 100;
-    public int $page = 1;
+    public int $page     = 1;
 
     public function __construct(string $merchantIdentifier)
     {
@@ -40,9 +44,7 @@ class Reviews extends Client
             $query['product_sku'] = '*' . $this->sku . '*';
         }
 
-        $response = json_decode($this->get($this->url, [
-            RequestOptions::QUERY => $query,
-        ])->getBody());
+        $response = json_decode($this->get($this->url, [RequestOptions::QUERY => $query])->getBody());
 
         return $this->makeReviews($response);
     }
@@ -50,42 +52,49 @@ class Reviews extends Client
     public function url(string $url): Reviews
     {
         $this->url = $url;
+
         return $this;
     }
 
     public function sincePeriod(string $sincePeriod): Reviews
     {
         $this->sincePeriod = $sincePeriod;
+
         return $this;
     }
 
     public function fullThread(string $fullThread): Reviews
     {
         $this->fullThread = $fullThread;
+
         return $this;
     }
 
     public function pageSize(int $pageSize): Reviews
     {
         $this->pageSize = $pageSize;
+
         return $this;
     }
 
     public function page(int $page): Reviews
     {
         $this->page = $page;
+
         return $this;
     }
 
     public function fields(string $fields): Reviews
     {
         $this->fields = $fields;
+
         return $this;
     }
 
     public function sku(string $sku): Reviews
     {
         $this->sku = $sku;
+
         return $this;
     }
 
@@ -97,6 +106,7 @@ class Reviews extends Client
                 $reviews[] = new Review($review);
             }
         }
+
         return new ResultSet($this, $reviews, $response->summary->meta);
     }
 }

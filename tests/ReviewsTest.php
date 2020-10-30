@@ -1,23 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SykesCottages\Feefo\Tests;
 
 use PHPUnit\Framework\TestCase;
 use SykesCottages\Feefo\Review;
 use SykesCottages\Feefo\Reviews;
 
+use function file_get_contents;
+use function json_decode;
+
 class ReviewsTest extends TestCase
 {
-    /**
-     * @var Reviews
-     */
-    private $reviews;
+    private Reviews $reviews;
+    /** @var mixed */
     private $sampleReviews;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->reviews = new Reviews('example-retail-merchant');
+        $this->reviews       = new Reviews('example-retail-merchant');
         $this->sampleReviews = json_decode(file_get_contents(__DIR__ . '/fixtures/SampleReviews.json'));
     }
 
