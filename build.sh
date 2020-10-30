@@ -1,3 +1,3 @@
 #!/bin/bash -e
-vendor/bin/phpcs --standard=Doctrine src
+vendor/bin/phpcs
 vendor/bin/phpunit

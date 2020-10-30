@@ -14,7 +14,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SykesCottages\\Feefo\\Tests\\": "src/tests/"
+            "SykesCottages\\Feefo\\Tests\\": "tests/"
         }
     },
     "require": {
