@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SykesCottages\Feefo;
 
 use Countable;
@@ -29,9 +27,9 @@ class ResultSet implements Countable, Iterator
     }
 
     /**
-     * @return array<mixed>
+     * @return mixed
      */
-    public function current(): array
+    public function current()
     {
         return $this->array[$this->current];
     }
