@@ -1,11 +1,3 @@
-#!/bin/bash
-
-vendor/bin/phpcs --standard=Doctrine --report=full --report-json=phpcs.json src
-
-errors=($(jq -r '.totals.errors' phpcs.json))
-
-if (( $errors > 0 )); then
-  exit 1
-fi
-
+#!/bin/bash -e
+vendor/bin/phpcs --standard=Doctrine src
 vendor/bin/phpunit
