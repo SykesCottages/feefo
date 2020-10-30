@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vendor/bin/phpcs --standard=Doctrine --report-json=./phpcs.json src
+vendor/bin/phpcs --standard=Doctrine --report=full --report-json=phpcs.json src
 
 errors=($(jq -r '.totals.errors' phpcs.json))
 
