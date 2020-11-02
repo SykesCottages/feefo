@@ -1,4 +1,5 @@
 .idea
 html
 vendor
+.phpunit.result.cache
 composer.lock

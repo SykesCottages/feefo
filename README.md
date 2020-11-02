@@ -1,12 +1,16 @@
 # Feefo PHP API Package
 
-This is designed to be an easy way in php to use the reviews API from Feefo.
+[![Build Status](https://travis-ci.org/SykesCottages/feefo.svg?branch=master)](https://travis-ci.org/SykesCottages/feefo)
 
-This can be installed using composer for example:
+This package is designed to be an easy way to query the Feefo reviews API in php.
 
-    composer require sykescottages/feefo
-    
- Then the most simple method of getting the reviews is as follows
+It can be installed using composer by running the following command:
+
+```
+composer require sykescottages/feefo
+```
+
+Then simplest method of getting the reviews is as follows:
  
 ```php
 $reviews = new SykesCottages\Feefo\Reviews('merchant-identifier');
@@ -20,8 +24,8 @@ foreach ($reviews->getReviews() as $review) {
 All functions can be chained, together for example:
 
 ```php
-$reviews->sku('sku')->pageSize(50));
-foreach ($reviews->getReviews() as $review) {
+$reviews = new SykesCottages\Feefo\Reviews('merchant-identifier');
+foreach ($reviews->sku('sku')->pageSize(50)->getReviews() as $review) {
     // Handle review here
 }
 ```
